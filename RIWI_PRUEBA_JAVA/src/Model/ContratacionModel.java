@@ -146,7 +146,7 @@ public class ContratacionModel implements CRUD
         {
             Contratacion contract = (Contratacion) object;
 
-            String sqlQuery = "UPDATE contratacion SET fecha_aplicacion = ?, estado = ?, salario = ? fk_id_vacante = ?, fk_id_coder = ? WHERE id_contratacion = ?;";
+            String sqlQuery = "UPDATE contratacion SET fecha_aplicacion = ?, estado = ?, salario = ?, fk_id_vacante = ?, fk_id_coder = ? WHERE id_contratacion = ?;";
 
             PreparedStatement preparedStatement = conexion.prepareStatement(sqlQuery);
 

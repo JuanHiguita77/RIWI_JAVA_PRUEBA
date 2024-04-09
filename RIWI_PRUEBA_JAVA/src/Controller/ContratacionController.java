@@ -69,7 +69,7 @@ public class ContratacionController
                 contractsList,
                 contractsList[0]);
 
-        Contratacion optionVacantSelected = (Contratacion) JOptionPane.showInputDialog(null,
+        Vacante optionVacantSelected = (Vacante) JOptionPane.showInputDialog(null,
                 "Select a Vacant To Add",
                 "",
                 JOptionPane.QUESTION_MESSAGE,
@@ -77,7 +77,7 @@ public class ContratacionController
                 vacantList,
                 vacantList[0]);
 
-        Contratacion optionCoderSelected = (Contratacion) JOptionPane.showInputDialog(null,
+        Coder optionCoderSelected = (Coder) JOptionPane.showInputDialog(null,
                 "Select a Coder To Add",
                 "",
                 JOptionPane.QUESTION_MESSAGE,

@@ -117,6 +117,7 @@ public class ContratacionModel implements CRUD
             if (resultadoFilasAfectadas > 0)
             {
                 isDeleted = true;
+                JOptionPane.showInputDialog("Deleted Succesfull");
             }
             else
             {

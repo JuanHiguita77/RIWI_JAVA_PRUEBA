@@ -151,11 +151,10 @@ public class Main {
                     {
                         contractOptionMenu = JOptionPane.showInputDialog("""
                                     1 - List All Contracts
-                                    2 - Search By Contract Date
-                                    3 - Add New Contract
-                                    4 - Update Contract
-                                    5 - Delete Contract
-                                    6 - Exit Contracts Menu
+                                    2 - Add New Contract
+                                    3 - Update Contract
+                                    4 - Delete Contract
+                                    5 - Exit Contracts Menu
                                     """);
 
                         switch (contractOptionMenu)
@@ -164,24 +163,20 @@ public class Main {
                                 ContratacionController.listContracts();
                                 break;
 
-                            /*case "2":
-                                ContratacionController.findByDate();
-                                break;*/
-
-                            case "3":
+                            case "2":
                                 ContratacionController.create();
                                 break;
 
-                            case "4":
+                            case "3":
                                 ContratacionController.update();
                                 break;
 
-                            case "5":
+                            case "4":
                                 ContratacionController.delete();
                                 break;
 
                         }
-                    }while (!contractOptionMenu.equals("6"));
+                    }while (!contractOptionMenu.equals("5"));
                     break;
             }
         }while(!optionPrincipalMenu.equals("5"));

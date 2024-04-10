@@ -111,57 +111,65 @@ public class ContratacionController
 
         Object[] vacantList = Utils.listToarray(vacantsEnable);
 
-        Vacante optionVacantSelected = (Vacante) JOptionPane.showInputDialog(null,
-                "Select a Vacant To Add",
-                "",
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                vacantList,
-                vacantList[0]);
-
-        Coder optionCoderSelected = (Coder) JOptionPane.showInputDialog(null,
-                "Select a Coder To Add",
-                "",
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                codersList,
-                codersList[0]);
-
-        if (!instanceContractModel().verifyOfert(optionVacantSelected.getDescription()))
+        if (vacantList.length > 0)
         {
-            JOptionPane.showInputDialog(null, "DONT HAVE THE REQUERIMENTS ");
+            Vacante optionVacantSelected = (Vacante) JOptionPane.showInputDialog(null,
+                    "Select a Vacant To Add",
+                    "",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    vacantList,
+                    vacantList[0]);
+
+
+            Coder optionCoderSelected = (Coder) JOptionPane.showInputDialog(null,
+                    "Select a Coder To Add",
+                    "",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    codersList,
+                    codersList[0]);
+
+            if (!instanceContractModel().verifyOfert(optionVacantSelected.getDescription()))
+            {
+                JOptionPane.showInputDialog(null, "DONT HAVE THE REQUERIMENTS ");
+            }
+            else
+            {
+
+                //Se cambia el estado de la contratacion manual
+                String state = JOptionPane.showInputDialog("Insert contract State 'ACTIVO' or 'INACTIVO'");
+                double salary = Double.parseDouble(JOptionPane.showInputDialog("Insert Salary for contract"));
+
+                optionVacantSelected.setState("INACTIVO");
+
+                //Usando la instancia del modelo y los metodos, creamos el objeto que se espera pasandole los datos correspondientes
+                instanceContractModel().create(new Contratacion(optionVacantSelected.getId_vacante(), optionCoderSelected.getId_coder(), state, salary));
+
+                String enterpriseName = "", enterpriseUbication = "";
+
+                for (Object enterprise: enterprises)
+                {
+                    Empresa enterpriseNew = (Empresa) enterprise;
+
+                    if (enterpriseNew.getId_empresa() == optionVacantSelected.getId_empresa())
+                    {
+                        enterpriseName = enterpriseNew.getName();
+                        enterpriseUbication = enterpriseNew.getUbication();
+                    }
+                }
+
+
+
+                JOptionPane.showMessageDialog(null, "Vacante: " + optionVacantSelected.getTitle() + " -- Description: " + optionVacantSelected.getDescription() + "" +
+                        "\n Enterprise: " + enterpriseName + " --- Enterprise Ubication: " + enterpriseUbication +
+                        "\n Coder Name: " + optionCoderSelected.getName() + " --- Surnames: " + optionCoderSelected.getSurname() + " --- Document: " + optionCoderSelected.getDocument() +
+                        "\n --- Technology: " + optionCoderSelected.getCv() + "  --- Salary: " + salary);
+            }
         }
         else
         {
-
-            //Se cambia el estado de la contratacion manual
-            String state = JOptionPane.showInputDialog("Insert contract State 'ACTIVO' or 'INACTIVO'");
-            double salary = Double.parseDouble(JOptionPane.showInputDialog("Insert Salary for contract"));
-
-            optionVacantSelected.setState("INACTIVO");
-
-            //Usando la instancia del modelo y los metodos, creamos el objeto que se espera pasandole los datos correspondientes
-            instanceContractModel().create(new Contratacion(optionVacantSelected.getId_vacante(), optionCoderSelected.getId_coder(), state, salary));
-
-            String enterpriseName = "", enterpriseUbication = "";
-
-            for (Object enterprise: enterprises)
-            {
-                Empresa enterpriseNew = (Empresa) enterprise;
-
-                if (enterpriseNew.getId_empresa() == optionVacantSelected.getId_empresa())
-                {
-                    enterpriseName = enterpriseNew.getName();
-                    enterpriseUbication = enterpriseNew.getUbication();
-                }
-            }
-
-
-
-            JOptionPane.showMessageDialog(null, "Vacante: " + optionVacantSelected.getTitle() + " -- Description: " + optionVacantSelected.getDescription() + "" +
-                    "\n Enterprise: " + enterpriseName + " --- Enterprise Ubication: " + enterpriseUbication +
-                    "\n Coder Name: " + optionCoderSelected.getName() + " --- Surnames: " + optionCoderSelected.getSurname() + " --- Document: " + optionCoderSelected.getDocument() +
-                    "\n --- Technology: " + optionCoderSelected.getCv() + "  --- Salary: " + salary);
+            JOptionPane.showMessageDialog(null, "NO VACANTS CURRENTLY");
         }
     }
 }

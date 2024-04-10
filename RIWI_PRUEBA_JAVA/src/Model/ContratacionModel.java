@@ -117,7 +117,7 @@ public class ContratacionModel implements CRUD
             if (resultadoFilasAfectadas > 0)
             {
                 isDeleted = true;
-                JOptionPane.showInputDialog("Deleted Succesfull");
+                JOptionPane.showMessageDialog(null, "Deleted Succesfull");
             }
             else
             {
@@ -147,17 +147,16 @@ public class ContratacionModel implements CRUD
         {
             Contratacion contract = (Contratacion) object;
 
-            String sqlQuery = "UPDATE contratacion SET fecha_aplicacion = ?, estado = ?, salario = ?, fk_id_vacante = ?, fk_id_coder = ? WHERE id_contratacion = ?;";
+            String sqlQuery = "UPDATE contratacion SET estado = ?, salario = ?, fk_id_vacante = ?, fk_id_coder = ? WHERE id_contratacion = ?;";
 
             PreparedStatement preparedStatement = conexion.prepareStatement(sqlQuery);
 
             //Se le pasa posicion y dato al statement
-            preparedStatement.setDate(1, contract.getAplication_date());
-            preparedStatement.setString(2, contract.getState());
-            preparedStatement.setDouble(3, contract.getSalary());
-            preparedStatement.setInt(4, contract.getId_vacante());
-            preparedStatement.setInt(5, contract.getId_coder());
-            preparedStatement.setInt(6, contract.getId_contratacion());
+            preparedStatement.setString(1, contract.getState());
+            preparedStatement.setDouble(2, contract.getSalary());
+            preparedStatement.setInt(3, contract.getId_vacante());
+            preparedStatement.setInt(4, contract.getId_coder());
+            preparedStatement.setInt(5, contract.getId_contratacion());
 
             int resultado = preparedStatement.executeUpdate();
 
